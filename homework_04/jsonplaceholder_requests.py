@@ -19,7 +19,9 @@ async def get_users():
     data = await fetch_json(USERS_DATA_URL)
     users = []
     for user in data:
-        user_data = {k: v for k, v in user.items() if k in ['name', 'username', 'email']}
+        user_data = {
+            k: v for k, v in user.items() if k in ["name", "username", "email"]
+        }
         users.append(user_data)
     return users
 
@@ -28,6 +30,6 @@ async def get_posts():
     data = await fetch_json(POSTS_DATA_URL)
     posts = []
     for post in data:
-        post_data = {k: v for k, v in post.items() if k in ['userId', 'title', 'body']}
+        post_data = {k: v for k, v in post.items() if k in ["userId", "title", "body"]}
         posts.append(post_data)
     return posts

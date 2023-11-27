@@ -22,56 +22,38 @@ from typing import List
 
 
 async def create_user(
-        session: AsyncSession,
-        name: str,
-        username: str,
-        email: str
+    session: AsyncSession, name: str, username: str, email: str
 ) -> User:
-    user = User(
-        name=name,
-        username=username,
-        email=email
-    )
+    user = User(name=name, username=username, email=email)
     session.add(user)
     await session.commit()
     return user
 
 
-async def create_users(
-        session: AsyncSession,
-        users: list
-) -> list[User]:
-    users_list = [User(name=user['name'],
-                  username=user['username'],
-                  email=user['email']) for user in users]
+async def create_users(session: AsyncSession, users: list) -> list[User]:
+    users_list = [
+        User(name=user["name"], username=user["username"], email=user["email"])
+        for user in users
+    ]
     session.add_all(users_list)
     await session.commit()
     return users_list
 
 
 async def create_post(
-        session: AsyncSession,
-        user_id: int,
-        title: str,
-        body: str
+    session: AsyncSession, user_id: int, title: str, body: str
 ) -> Post:
-    post = Post(
-        user_id=user_id,
-        title=title,
-        body=body
-    )
+    post = Post(user_id=user_id, title=title, body=body)
     session.add(post)
     await session.commit()
     return post
 
 
-async def create_posts(
-        session: AsyncSession,
-        posts: list
-) -> list[Post]:
-    posts_list = [Post(user_id=post['userId'],
-                  title=post['title'],
-                  body=post['body']) for post in posts]
+async def create_posts(session: AsyncSession, posts: list) -> list[Post]:
+    posts_list = [
+        Post(user_id=post["userId"], title=post["title"], body=post["body"])
+        for post in posts
+    ]
     session.add_all(posts_list)
     await session.commit()
     return posts_list
@@ -84,8 +66,7 @@ async def async_main():
         posts_data: List[dict]
         users_data: List[dict]
         users_data, posts_data = await asyncio.gather(
-            jsonplaceholder_requests.get_users(),
-            jsonplaceholder_requests.get_posts()
+            jsonplaceholder_requests.get_users(), jsonplaceholder_requests.get_posts()
         )
         await create_users(session, users_data)
         await create_posts(session, posts_data)
