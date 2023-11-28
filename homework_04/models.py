@@ -14,6 +14,7 @@ from sqlalchemy.ext.asyncio import async_sessionmaker
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import declared_attr
+from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column
 from sqlalchemy import Integer
@@ -26,20 +27,17 @@ PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or (
 
 async_engine = create_async_engine(url=PG_CONN_URI, echo=False)
 
+Base = declarative_base()
+
 Session = async_sessionmaker(
     bind=async_engine, class_=AsyncSession, expire_on_commit=False
 )
 
 
-class Base(DeclarativeBase):
-    @declared_attr.directive
-    def __tablename__(cls) -> str:
-        return f"{cls.__name__.lower()}s"
+class User(Base):
+    __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
-
-
-class User(Base):
     name = Column(String, nullable=False)
     username = Column(String, nullable=False, unique=True)
     email = Column(String, nullable=True, unique=True)
@@ -47,6 +45,9 @@ class User(Base):
 
 
 class Post(Base):
+    __tablename__ = 'posts'
+
+    id = Column(Integer, primary_key=True)
     user_id = Column(
         Integer,
         ForeignKey("users.id"),

@@ -15,8 +15,10 @@
 import asyncio
 import jsonplaceholder_requests
 from sqlalchemy.ext.asyncio import AsyncSession
+from models import Base
 from models import User
 from models import Post
+from models import async_engine
 from models import Session
 from typing import List
 
@@ -60,8 +62,9 @@ async def create_posts(session: AsyncSession, posts: list) -> list[Post]:
 
 
 async def async_main():
-    # Base.metadata.drop_all(bind=async_engine)
-    # Base.metadata.create_all(bind=async_engine)
+    async with async_engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
+        await conn.run_sync(Base.metadata.create_all)
     async with Session() as session:
         posts_data: List[dict]
         users_data: List[dict]
