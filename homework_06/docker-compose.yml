@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  app:
+    build:
+      dockerfile: ./docker-build/Dockerfile
+      context: ./
+
+    environment:
+      SQLALCHEMY_DATABASE_URI: postgresql+psycopg://postgres:password@pg:5432/postgres
+    ports:
+      #      - "5050:5000"
+      - "5050:80"
+    volumes:
+      - ./templates:/app/templates
+  postgres:
+      environment:
+        POSTGRES_DB: postgres
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: password
+      image: postgres:13.1
+      restart: always
+      ports:
+          - "5432:5432"
+      volumes:
+        - db_data:/home/postgresql
+        - db_data:/var/log/postgresql
+      networks:
+        - net
+
+networks:
+  net:
+
+volumes:
+    db_data:
+        external: true
+
