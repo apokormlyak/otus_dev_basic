@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  User #{{ user.id }} details
+{% endblock %}
+
+{% block main %}
+  <h1>User #{{ iser.id }}</h1>
+  <h2>{{ user.name }}</h2>
+
+  <br>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris euismod auctor lacus, id faucibus felis fringilla vitae
+      Aliquam posuere elementum lacus vitae imperdiet. Praesent finibus euismod fermentum. Ut lobortis porttitor tellus, eget
+    ultricies elit consequat a. Integer eget sagittis libero, ac hendrerit mi. Sed ligula massa, sodales vel interdum id,
+    luctus at tortor. Suspendisse pharetra vestibulum nisl ut sagittis. Curabitur facilisis, lectus at feugiat tristique,
+    augue diam auctor turpis, sit amet tempor augue dolor rutrum velit. Integer posuere nibh dui, sed vehicula nunc lacinia
+    ut. Morbi magna sem, malesuada non erat ac, rutrum rutrum tortor.
+  </p>
+  <br>
+  <div>
+
+    <a href="{{ url_for('base') }}">Back to users list</a>
+  </div>
+{% endblock %}
