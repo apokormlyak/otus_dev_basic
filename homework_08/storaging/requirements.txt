@@ -1,0 +1,18 @@
+django==4.2.7
+django-environ==0.11.2  # https://github.com/joke2k/django-environ
+django-cors-headers==4.3.1
+Werkzeug == 3.0.1
+django-extensions==3.2.3
+
+# Django REST Framework
+djangorestframework==3.14.0  # https://github.com/encode/django-rest-framework
+PyJWT==2.8.0
+django-filter==23.4.0 # https://django-filter.readthedocs.io/en/latest/index.html
+djoser==2.2.0
+drf-spectacular==0.26.5 # https://github.com/tfranzel/drf-spectacular
+black==23.11.0  # https://github.com/ambv/black
+dj-database-url==2.1.0
+psycopg2-binary==2.9.9  # https://github.com/psycopg/psycopg2
+pylint-django==2.5.5  # https://github.com/PyCQA/pylint-django
+pre-commit==3.5.0  # https://github.com/pre-commit/pre-commit
+

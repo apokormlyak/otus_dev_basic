@@ -1,0 +1,25 @@
+
+{% block title %}
+  Типы хранения
+{% endblock %}
+
+{% block body %}
+  <h1>Типы хранения:</h1>
+  {% if object_list %}
+    <ul>
+      {% for type in object_list %}
+        <li>
+          <strong>{{ type.name }}</strong> <em>({{ type.warehouse }})</em>.
+          <strong>
+            <a href="{% url 'warehouses:storagetype_detail' pk=type.pk %}">
+              {{ type.name }}
+            </a>
+               </strong>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <h2>Пока нет типов хранения</h2>
+  {% endif %}
+
+{% endblock %}
