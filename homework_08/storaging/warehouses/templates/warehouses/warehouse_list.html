@@ -1,0 +1,25 @@
+
+{% block title %}
+  Склады
+{% endblock %}
+
+{% block body %}
+  <h1>Склады:</h1>
+  {% if object_list %}
+    <ul>
+      {% for warehouse in object_list %}
+        <li>
+          <strong>{{ warehouse.name }}</strong> <em>({{ warehouse.address }})</em>.
+           <strong>
+            <a href="{% url 'warehouses:warehouse_detail' pk=warehouse.pk %}">
+                {{ warehouse.name }}
+            </a>
+               </strong>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <h2>Пока нет складов</h2>
+  {% endif %}
+
+{% endblock %}

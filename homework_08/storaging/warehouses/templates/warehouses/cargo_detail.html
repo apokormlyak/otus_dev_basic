@@ -1,0 +1,11 @@
+{% block title %}
+  {{object.name}}
+{% endblock %}
+
+{% block body %}
+  <h1>{{object.name}}</h1>
+    {{object.category.name}}
+<div>
+  <a href="{% url 'warehouses:cargo_list' %}">Вернуться к списку</a>
+</div>
+{% endblock %}

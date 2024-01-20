@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+  backend:
+      hostname: django
+      restart: always
+      build:
+        context: ..
+        dockerfile: ./storaging/docker-build/Dockerfile
+        args:
+          - REQUIREMENTS_PATH=/app/requirements.txt
+      command: bash ./docker-build/start
+      volumes:
+        - .:/app
+        - static_volume:/app/django_static
+        - media_volume:/app/django_media
+      ports:
+        - 8000:8000
+      depends_on:
+        - postgres
+      networks:
+        - net
+      env_file:
+        - environment
+  postgres:
+      env_file:
+        - environment
+      image: postgres:13.1
+      restart: always
+      ports:
+        - "5439:5432"
+      volumes:
+        - db_data:/home/postgresql
+        - db_data:/var/log/postgresql
+      networks:
+        - net
+
+networks:
+  net:
+
+volumes:
+    static_volume: { }
+    media_volume: { }
+    db_data:
+        external: true
