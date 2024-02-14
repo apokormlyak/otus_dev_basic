@@ -28,4 +28,4 @@ jobs:
         ./manage.py migrate --noinput
     - name: Test with pytest
       run: |
-        pytest
+        docker-compose run --rm  backend pytest
