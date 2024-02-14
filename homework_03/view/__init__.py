@@ -1,1 +1,0 @@
-from .ping_ping import app as app
