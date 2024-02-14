@@ -21,7 +21,7 @@ jobs:
         image: postgres:13.1
         # Provide the password for postgres
         env:
-          POSTGRES_PASSWORD: password
+          POSTGRES_PASSWORD: secretpassword
         # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
@@ -45,4 +45,4 @@ jobs:
       run: |
         pytest
       env:
-        SQLALCHEMY_PG_CONN_URI: pgsql://admin:password@localhost:5432/storaging_db
+        SQLALCHEMY_PG_CONN_URI: postgresql+asyncpg://postgres:secretpassword@localhost:5432/postgres
