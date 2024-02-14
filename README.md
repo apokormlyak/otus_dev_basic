@@ -1,11 +1,22 @@
-# otus_dev_basic
+# otus_dev_project
 
-Запустить сервис: 
+## Проектная работа на тему "Складские операции"
+
+
+### запуск приложения
+
+Создаем файл окружения по примеру environment.example
+```
+ln -s environment.example environment
+```
+
 ```
 docker-compose up --build
 ```
 
-Запустить тесты: 
+### Приложение доступно по адресу: http://localhost:8000/warehouses/
+
+### тесты
 ```
-docker exec -i storaging-backend-1 python manage.py test
+docker-compose run --rm  backend pytest
 ```
